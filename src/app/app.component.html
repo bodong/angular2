@@ -1,16 +1,33 @@
 <div class="container">
 <app-user-editor></app-user-editor>
-
-
-
-<section *ngIf="!isEditMode">
+<section *ngIf="!isEditMode" class="user-selector">
 <h1>{{title}}</h1>
+<ul>
+  
+  <li *ngFor="let item of users; let i = index" (click)="selectedUser=item">
+     {{item.name}} <span class="age">{{item.age}}</span>
+     <button (click)=deleteUser(i)>Delete</button>
+  </li>  
+</ul>  
+<button (click)=addUser()>Add User</button> 
+<div>
+Sum Age : {{users | sumPipe}}
+</div>
+<br/><br/>
+<div>
+  <div><h1>Only Young User</h1></div>
+  <li *ngFor="let item of getUsers() | filterPipe; let i = index" (click)="selectedUser=item">
+     {{item.name}} <span class="age">{{item.age}}</span>
+     <button (click)=deleteUser(i)>Delete</button>
+  </li>
+</div>  
+
 <h1>Detail</h1>
 <div>
-    <b>Name:</b>{{user.name}}
-    <b>Age:</b>{{user.age}}<br/>
-    <b>Weight:</b>{{user.weight}}
-    <b>Height:</b>{{user.height}}<br/>
+    <b>Name:</b>{{selectedUser.name}}
+    <b>Age:</b>{{selectedUser.age}}<br/>
+    <b>Weight:</b>{{selectedUser.weight}}
+    <b>Height:</b>{{selectedUser.height}}<br/>
 </div>
 <button (click)="isEditMode=true">Edit</button>
 </section>
@@ -21,11 +38,11 @@
 <section *ngIf="isEditMode">
 <button (click)="isEditMode=false">Back</button>
 <h2> Editor</h2>
-<pre >{{user|json}}</pre>
-<input type="text" [(ngModel)]="user.name" /><br/>
-<input type="number" [(ngModel)]="user.age" /><br/>
-<input type="number" [(ngModel)]="user.weight" /><br/>
-<input type="number" [(ngModel)]="user.height" /><br/>  
+<pre >{{selectedUser|json}}</pre>
+<input type="text" [(ngModel)]="selectedUser.name" /><br/>
+<input type="number" [(ngModel)]="selectedUser.age" /><br/>
+<input type="number" [(ngModel)]="selectedUser.weight" /><br/>
+<input type="number" [(ngModel)]="selectedUser.height" /><br/>  
 <button (click)="onCheckAge()">
   Check Age
 </button>
