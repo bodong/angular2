@@ -8,7 +8,8 @@ import {User} from './user'
 })
 export class AppComponent {
   title:string ="Angular is awesome";
-  user:User
+  user:User;
+  isEditMode:Boolean = false;
 
   constructor(){
     this.user = new User();
@@ -26,5 +27,13 @@ export class AppComponent {
     } else {
       alert("have fun!!!")
     }
+  }
+
+  onCheckBMI(){
+   alert(this.user.getBMI())  
+  }
+
+  isHealthy(){
+   alert(this.user.getHealthy())  
   }
 }
