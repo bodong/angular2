@@ -1,3 +1,26 @@
-<h1>
-  {{title}}
-</h1>
+<section *ngIf="!isEditMode">
+<h1>{{title}}</h1>
+<h1>Detail</h1>
+<div>
+    <b>Name:</b>{{user.name}}
+    <b>Age:</b>{{user.age}}<br/>
+    <b>Weight:</b>{{user.weight}}
+    <b>Height:</b>{{user.height}}<br/>
+</div>
+<button (click)="isEditMode=true">Edit</button>
+</section>
+
+
+
+
+<section *ngIf="isEditMode">
+<h2> Editor</h2>
+<pre >{{user|json}}</pre>
+<input type="text" [(ngModel)]="user.name" /><br/>
+<input type="number" [(ngModel)]="user.age" /><br/>
+<input type="number" [(ngModel)]="user.weight" /><br/>
+<input type="number" [(ngModel)]="user.height" /><br/>  
+<button (click)="onCheckAge()">
+  Check Age
+</button>
+</section>

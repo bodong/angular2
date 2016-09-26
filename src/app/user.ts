@@ -3,4 +3,12 @@ export class User{
     age:number;
     weight:number;
     height:number;    
+
+    isOld():boolean{
+    if(this.age >= 100) {
+      return true;
+    } else {
+      return false;
+     }
+    }
 }
